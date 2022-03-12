@@ -15,8 +15,6 @@ app.use(express.json());
 // STATIC MIDDLEWARE
 app.use(express.static("./public"));
 
-
-
 //GET API db.json
 app.get("/api/notes", (req, res) => {
     res.sendFile(path.join(__dirname, "./db/db.json"))
@@ -46,7 +44,7 @@ app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "./public/index.html"));
 });
 //call for notes.html
-app.get("/notes", function (req, res) {
+app.get("/public/notes.html", function (req, res) {
     res.sendFile(path.join(__dirname, "./public/index.html"));
 });
 
