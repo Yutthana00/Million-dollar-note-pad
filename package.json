@@ -2,7 +2,7 @@
   "name": "million-dollar-note-pad",
   "version": "1.0.0",
   "description": "Express js note taking pad with edit and save button.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo"
   },
