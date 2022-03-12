@@ -1,16 +1,22 @@
 {
   "name": "million-dollar-note-pad",
   "version": "1.0.0",
-  "description": "A note pad where user can save notes and delete at anytime they want.",
-  "main": "server.js",
+  "description": "Express js note taking pad with edit and save button.",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: not test specified\" && exit 1",
-    "start": "nodemon --exec babel-node public/js/server.js"
+    "test": "echo"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Yutthana00/Million-dollar-note-pad.git"
   },
+  "keywords": [
+    "Express",
+    "js",
+    "npm",
+    "heroku",
+    "node"
+  ],
   "author": "Yutthana",
   "license": "ISC",
   "bugs": {
