@@ -4,8 +4,8 @@
   "description": "A note pad where user can save notes and delete at anytime they want.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: not test specified\" && exit 1",
-    "start": "nodemon --exec babel-node public/js/server.js"
+    "test": "jest",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
