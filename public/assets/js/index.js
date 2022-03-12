@@ -92,7 +92,7 @@ const renderActiveNote = () => {
     $noteList.empty();
   
     const noteListItems = [];
-  
+   
     
     const create$li = (text, withDeleteButton = true) => {
         const $li = $("<li class='list-group-item'>");
