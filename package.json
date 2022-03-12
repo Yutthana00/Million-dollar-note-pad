@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Yutthana00/Million-dollar-note-pad/issues"
   },
-  "homepage": "https://github.com/Yutthana00/Million-dollar-note-pad#readme"
+  "homepage": "https://github.com/Yutthana00/Million-dollar-note-pad#readme",
+  "devDependencies": {
+    "jest": "^27.5.1"
+  }
 }
