@@ -1,6 +1,6 @@
-const express = require("express");
-const path = require("path");
 const fs = require("fs");
+const path = require("path");
+const express = require("express");
 const notes = require("./db/db.json");
 const uuid = require("uuid");
 const { DH_CHECK_P_NOT_SAFE_PRIME, SSL_OP_SSLEAY_080_CLIENT_DH_BUG } = require("constants");
@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // STATIC MIDDLEWARE
-app.use(express.static("./public"));
+app.use(express.static("public"));
 
 //GET API db.json
 app.get("/api/notes", (req, res) => {
