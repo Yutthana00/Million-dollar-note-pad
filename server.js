@@ -1,19 +1,24 @@
 const fs = require("fs");
 const path = require("path");
 const express = require("express");
-const notes = require("./db/db.json");
+const noteDatabase = require("./db/db.json");
 const uuid = require("uuid");
-const { DH_CHECK_P_NOT_SAFE_PRIME, SSL_OP_SSLEAY_080_CLIENT_DH_BUG } = require("constants");
 
 const app = express();
+
 var PORT = process.env.PORT || 3001;
 
-// Middleware
+// Middleware for data parsing.
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // STATIC MIDDLEWARE
 app.use(express.static("public"));
+
+// Load index html landing page:
+app.get("/notes", (req, res) => {
+    res.sendFile(path.join(__dirname, "/public/notes.html"));
+});
 
 //GET API db.json
 app.get("/api/notes", (req, res) => {
