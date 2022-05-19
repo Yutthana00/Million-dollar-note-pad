@@ -95,6 +95,23 @@ const handleNoteDelete = (e) => {
   });
 };
 
+// Set active note and display it.
+const handleNoteView = (e) => {
+  e.preventDefault();
+  activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
+  renderActiveNote();
+};
+
+// Sets active note to empty object which allows a user to enter new notes.
+const handleNewNoteView = (e) => {
+  activeNote = {};
+  renderActiveNote();
+};
+
+
+
+
+
 // Get notes from db and renders them on sidebar.
 const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
