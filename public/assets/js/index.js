@@ -170,10 +170,7 @@ const renderNoteList = async (notes) => {
   }
 };
 
-
-
-
-// Get notes from db and renders them on sidebar.
+// Get notes from db and render them to sidebar
 const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
 if (window.location.pathname === '/notes') {
