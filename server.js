@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const express = require("express");
 const noteDatabase = require("./db/db.json");
-const uuid = require("uuid");
+const uniqid = require("uniqid");
 
 const app = express();
 
@@ -16,45 +16,47 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Load index html landing page:
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/index.html'));
+  });
+
+// Get notes page:
 app.get("/notes", (req, res) => {
     res.sendFile(path.join(__dirname, "/public/notes.html"));
 });
 
-//GET API db.json
-app.get("/api/notes", (req, res) => {
-    res.sendFile(path.join(__dirname, "./db/db.json"))
+// GET /api/notes read the db.json file and return all saved notes as JSON.
+app.get('/api/notes', (req, res) => {
+  res.json(noteDatabase);
 });
 
-// Post function to add new notes to db.json
-app.post("/api/notes", (req, res) => {
-    const notes = JSON.parse(fs.readFileSync("./db/db.json"));
-    const newNotes = req.body;
-    newNotes.id = uuid.v4();
-    notes.push(newNotes);
-    fs.writeFileSync("./db/db.json", JSON.stringify(notes))
-    res.json(notes);
+// POST /api/notes receive a new note to save on the request body, add it to the db.json file, and then return the new note to the client.
+app.post('/api/notes', (req, res) => {
+  const newNote = {
+    id: uniqid(),
+    title: req.body.title,
+    text: req.body.text,
+  };
+
+  // push the note to db.json
+  noteDatabase.push(newNote);
+
+  // write to the db.json file to update the database
+  fs.writeFile('./db/db.json', JSON.stringify(noteDatabase), (err) => (err ? console.log(err) : console.log('success')));
+
+  // returns the note to the client
+  res.json(noteDatabase);
 });
 
-//used for deleting notes
-app.delete("/api/notes/:id", (req, res) => {
-    const notes = JSON.parse(fs.readFileSync("./db/db.json"));
-    const delNote = notes.filter((rmvNote) => rmvNote.id !== req.params.id);
-    fs.writeFileSync("./db/db.json", JSON.stringify(delNote));
-    res.json(delNote);
-})
+// DELETE /api/notes/:id receives a query parameter that contains the id of a note to delete
+app.delete('/api/notes/:id', (req, res) => {
+  let noteId = req.params.id;
+  let index = noteDatabase.findIndex((note) => note.id === noteId);
+  let deletedNote = noteDatabase.splice(index, 1);
+  res.send(deletedNote);
 
-//HTML calls
-//calls home page
-app.get("/", function (req, res) {
-    res.sendFile(path.join(__dirname, "./public/index.html"));
-});
-//call for notes.html
-app.get("/public/notes.html", function (req, res) {
-    res.sendFile(path.join(__dirname, "./public/index.html"));
+  // re-writes the file with updated database
+  fs.writeFile('./db/db.json', JSON.stringify(noteDatabase), (err) => (err ? console.log(err) : console.log('success')));
 });
 
-//Start listen
-app.listen(PORT, function () {
-    console.log("App listening on PORT: " + PORT);
-});
-
+app.listen(PORT, () => console.log(`App listening at http://localhost:${PORT}`));
