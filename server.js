@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const express = require("express");
 const noteDatabase = require("./db/db.json");
-const uniqid = require("uniqid");
+const uuid = require("uuid");
 
 const app = express();
 
@@ -33,7 +33,7 @@ app.get('/api/notes', (req, res) => {
 // POST /api/notes receive a new note to save on the request body, add it to the db.json file, and then return the new note to the client.
 app.post('/api/notes', (req, res) => {
   const newNote = {
-    id: uniqid(),
+    id: uuid(),
     title: req.body.title,
     text: req.body.text,
   };
@@ -59,4 +59,4 @@ app.delete('/api/notes/:id', (req, res) => {
   fs.writeFile('./db/db.json', JSON.stringify(noteDatabase), (err) => (err ? console.log(err) : console.log('success')));
 });
 
-app.listen(PORT, () => console.log(`App listening at http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`App listening to ${PORT}`));
