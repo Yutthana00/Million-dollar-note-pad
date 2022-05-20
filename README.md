@@ -12,7 +12,7 @@
 - [email](#email)
 
 ### Description:
-   This app will save your daliy thoughts and schduel so you can get on with your day. User can save, admend and delete notes as they please. 
+   This app will save your daily thoughts and schedule so you can get on with your day. User can save, amend and delete notes as they please. 
 ### Installation:
     npm i   
     
